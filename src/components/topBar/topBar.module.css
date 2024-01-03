@@ -1,0 +1,19 @@
+.box {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding-left: 250px;
+  padding-top: 30px;
+}
+
+.addButton {
+  height: max-content;
+}
+.list {
+  display: flex;
+  gap: 20px;
+}
+.listItem label,
+.listItem input {
+  vertical-align: middle;
+}

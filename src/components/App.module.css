@@ -1,0 +1,19 @@
+.box {
+  position: relative;
+  display: block;
+
+  width: 1080px;
+  height: 400px;
+
+  margin: 100px auto 0 auto;
+
+  outline: 1px solid black;
+}
+
+.toggleButton {
+  position: absolute;
+
+  left: 90px;
+
+  width: max-content;
+}

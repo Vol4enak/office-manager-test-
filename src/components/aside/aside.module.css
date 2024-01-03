@@ -1,0 +1,15 @@
+.aside {
+  display: flex;
+  gap: 10px;
+  float: left;
+  height: 400px;
+  padding-left: 10px;
+  margin-right: 40px;
+  outline: 1px solid black;
+}
+.listIcons {
+  padding: 3px 0px 0px 0px;
+}
+.listText {
+  padding-top: 3px;
+}

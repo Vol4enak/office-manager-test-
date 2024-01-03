@@ -1,0 +1,17 @@
+.title {
+  margin-top: 20px;
+}
+
+.box {
+  display: flex;
+  margin-top: 10px;
+}
+.box input {
+  height: max-content;
+  width: 150px;
+
+}
+
+.text {
+  margin-top: 10px;
+}
