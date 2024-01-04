@@ -1,0 +1,20 @@
+.title {
+  margin-top: 20px;
+}
+
+.list {
+
+  margin-top: 10px;
+}
+.listItem {
+  display: flex;
+}
+.listItem p{
+  margin-right: 30px;
+}
+.button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  width: 30px;
+}

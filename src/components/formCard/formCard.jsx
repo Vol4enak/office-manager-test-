@@ -2,7 +2,7 @@ import { useState } from "react";
 // import {GetFact} from "./getFact"
 import css from "./formCard.module.css";
 
-export const FormCard = ({ onSubmit }) => {
+export const FormCard = ({ onSubmit ,onClick}) => {
   const [name, setName] = useState("");
   const [breed, setBreed] = useState("");
   const [years, setYears] = useState("");
@@ -66,7 +66,7 @@ export const FormCard = ({ onSubmit }) => {
             name="years"
             onChange={handelChange}
             value={years}
-            id=""
+            min="1"
             placeholder="Скільки йому років?"
             required
           />
@@ -78,7 +78,7 @@ export const FormCard = ({ onSubmit }) => {
             id=""
             required
           />
-          <button type="submit">Add cabinet</button>
+          <button type="submit" onClick={onClick}>Add cabinet</button>
         </form>
       </div>
       {/* <GetFact /> */}

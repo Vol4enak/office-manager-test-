@@ -1,9 +1,10 @@
 import css from "./App.module.css";
 import { useState } from "react";
 import { Aside } from "./aside/aside";
-import { CardList } from "./cardList/cardList";
+import { CardList } from "./СardList/СardList";
 import { TopBar } from "./topBar/topBar";
 import { FormCard } from "./formCard/formCard";
+import { downloadJsonFile } from "./service/addToJson";
 import { nanoid } from "nanoid";
 export const App = () => {
   const [btnText, setBtnText] = useState(true);
@@ -20,6 +21,7 @@ export const App = () => {
 
     setCabinet([cabinets, ...cabinet]);
   };
+  downloadJsonFile(cabinet);
   const handleBtn = () => {
     setBtnText(!btnText);
   };
