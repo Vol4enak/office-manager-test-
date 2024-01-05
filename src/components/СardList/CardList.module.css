@@ -1,20 +1,29 @@
-.title {
-  margin-top: 20px;
+.container{
+  overflow-y: scroll;
+
+  height: 280px;
 }
 
-.list {
-
-  margin-top: 10px;
-}
-.listItem {
+.reverseList {
   display: flex;
 }
-.listItem p{
+.list {
+  display: flex;
+  flex-direction: column-reverse;
+}
+.dox {
+  display: flex;
+  padding-top: 5px;
+}
+.listItem {
+  margin-top: 20px;
+}
+.listItem p {
   margin-right: 30px;
 }
 .button {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 30px;
 }

@@ -2,7 +2,7 @@ import { useState } from "react";
 // import {GetFact} from "./getFact"
 import css from "./formCard.module.css";
 
-export const FormCard = ({ onSubmit ,onClick}) => {
+export const FormCard = ({ onSubmit, onClick, status }) => {
   const [name, setName] = useState("");
   const [breed, setBreed] = useState("");
   const [years, setYears] = useState("");
@@ -42,7 +42,9 @@ export const FormCard = ({ onSubmit ,onClick}) => {
   };
   return (
     <>
-      <h2 className={css.title}>Cтворити кaбінет</h2>
+      <h2 className={css.title}>
+        {!status ? "Cтворити кaбінет" : "Редагувати кабінет"}
+      </h2>
       <div className={css.box}>
         <form onSubmit={handleSubmit}>
           <input
@@ -78,7 +80,9 @@ export const FormCard = ({ onSubmit ,onClick}) => {
             id=""
             required
           />
-          <button type="submit" onClick={onClick}>Add cabinet</button>
+          <button type="submit" onClick={onClick}>
+            Add cabinet
+          </button>
         </form>
       </div>
       {/* <GetFact /> */}

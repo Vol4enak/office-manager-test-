@@ -1,4 +1,5 @@
 import css from "./topBar.module.css";
+
 export const TopBar = () => {
   return (
     <div className={css.box}>
