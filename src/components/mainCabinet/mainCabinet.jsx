@@ -1,16 +1,17 @@
-import style from "./topBar.module.css";
 import css from "../СardList/CardList.module.css";
-import { CardList } from "../СardList/СardList";
+
 import { useState } from "react";
 import { IoBan } from "react-icons/io5";
 import { MdEdit } from "react-icons/md";
 import { IconContext } from "react-icons";
 import { EditForm } from "../formCard/editForm/editForm";
-export const TopBar = ({ onDelete, onSubmit, handleEditSubmit, item }) => {
+// import { GetFact } from "../formCard/getFact";
+
+export const MainCabinet = ({ onDelete, onSubmit, handleEditSubmit, id }) => {
   const [elements, setElements] = useState([]);
   const [isOpenForm, setIsOpenForm] = useState(null);
 
-  const handleAddElement = (id) => {
+  const handleAddElement = () => {
     const newElement = (
       <div key={elements.length}>
         <h2>Kaбінет</h2>
@@ -64,34 +65,11 @@ export const TopBar = ({ onDelete, onSubmit, handleEditSubmit, item }) => {
   };
 
   return (
-    <div>
-      <div className={style.box}>
-    
-        <button type="button" onClick={handleAddElement}>
-          Добавить элемент
-        </button>
-        <p>сотрування за</p>
-        <ul className={style.list}>
-          <li className={style.listItem}>
-            <label>
-              <input type="checkbox" name="" id="" />
-              датою
-            </label>
-          </li>
-          <li className={style.listItem}>
-            <label>
-              <input type="checkbox" name="" id="" /> віком
-            </label>
-          </li>
-        </ul>
-      </div>
-      <CardList
-        elements={elements}
-        item={item}
-        onDelete={onDelete}
-        onSubmit={onSubmit}
-        handleEditSubmit={handleEditSubmit}
-      />
+    <div className={css.helperBox}>
+      <button className={css.addBtn} type="button" onClick={handleAddElement}>
+        Добавить элемент
+      </button>
+      {elements.map((element) => element)}
     </div>
   );
 };

@@ -2,17 +2,18 @@
   margin-top: 20px;
 }
 
-.box {
+.formbox {
   display: flex;
   margin-top: 10px;
   margin-bottom: 30px;
 }
-.box input {
+.formbox input {
   height: max-content;
   width: 150px;
-
 }
-
+.helperBox{
+  display: block;
+}
 .text {
   margin-top: 10px;
 }

@@ -1,4 +1,4 @@
-import css from "./cabCard.module.css";
+import css from "../СardList/CardList.module.css";
 import { useState, useEffect } from "react";
 import api from "../service/api";
 
