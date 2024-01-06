@@ -31,4 +31,31 @@
   align-items: center;
   width: 30px;
 }
+.helperBox {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+.helperBox div {
+  display: flex;
+  margin-top: 15px;
+}
+.addBtn {
+  position: absolute;
+  top: 32px;
+  left: 200px;
+}
+.addInfoBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+}
+.boxWrapper {
+  margin-top: 30px;
+}
 
+.cabBox {
+  display: flex;
+  gap: 15px;
+}

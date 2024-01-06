@@ -1,8 +1,5 @@
-import css from "../CardList.module.css";
-export const CardItem = ({ item, elements, onDelete, onSubmit, handleEditSubmit }) => {
-
-  console.log(elements)
-
+import style from "../CardList.module.css";
+export const CardItem = ({ item }) => {
   const getYearWordForm = (numberYears) => {
     if (numberYears !== 1) {
       return "рік";
@@ -14,18 +11,21 @@ export const CardItem = ({ item, elements, onDelete, onSubmit, handleEditSubmit 
   };
 
   return (
-    <>
-      {elements && elements.map((element) => element)}
-      {item.map(({ id, birthday, breed, name, years }, index) => (
-        <li key={id} className={css.listItem}>
-          <div className={css.box}>
-            <p>{name}</p>
-            <p>{breed}</p>
-            <p>{years + " " + getYearWordForm(years)}</p>
-            <p>{birthday}</p>
-          </div>
-        </li>
-      ))}
-    </>
+    <div className={style.container}>
+      {item.length ? (
+        <ul className={style.list}>
+          {item.map(({ id, birthday, breed, name, years }, index) => (
+            <li key={id} className={style.listItem}>
+              <div className={style.box}>
+                <p>{name}</p>
+                <p>{breed}</p>
+                <p>{years + " " + getYearWordForm(years)}</p>
+                <p>{birthday}</p>
+              </div>
+            </li>
+          ))}
+        </ul>
+      ) : null}
+    </div>
   );
 };
