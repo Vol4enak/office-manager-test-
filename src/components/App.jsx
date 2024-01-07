@@ -15,13 +15,6 @@ export function App() {
       localStorage.clear();
     }
   };
-  //   const deleteInfoCats = (unikid) => {
-  //     deleteCabinet(unikid, catsInfo, setCatsInfo);
-  //   };
-  // const deleteCab = (unikid, cabinets, setCabinets) => {
-  //   console.log(cabinets + "кабинеты в функции");
-  //   deleteCabinet(unikid, cabinets, setCabinets);
-  // };
   const formSubmitHandler = (id, unikId, name, breed, years, birthday) => {
     console.log(birthday);
     const cabinet = {
@@ -56,9 +49,9 @@ export function App() {
   }, [catsInfo]);
 
   useEffect(() => {
-    const cabinet = localStorage.getItem("catsInfo");
-    if (cabinet) {
-      const parsetCab = JSON.parse(cabinet);
+    const catInfo = localStorage.getItem("catsInfo");
+    if (catInfo) {
+      const parsetCab = JSON.parse(catInfo);
       setCatsInfo(parsetCab);
     }
   }, []);

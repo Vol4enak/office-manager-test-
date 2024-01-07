@@ -35,6 +35,7 @@ export const CardItem = ({
 
   return (
     <div className={style.container}>
+      
       {items && items.length ? (
         <ul className={style.list}>
           {items.map(({ id, unikId, birthday, breed, name, years }) => (

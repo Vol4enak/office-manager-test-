@@ -1,7 +1,7 @@
 import css from "../СardList/CardList.module.css";
 import { useState } from "react";
 import { IoAdd, IoBan } from "react-icons/io5";
-import { IconContext } from "react-icons";
+
 import { FormCard } from "../formCard/formCard";
 import { nanoid } from "nanoid";
 
@@ -15,20 +15,18 @@ export const MainCabinet = ({
 }) => {
   const [cabinets, setCabinets] = useState([]);
   const [isOpenForm, setIsOpenForm] = useState(null);
-
   const toggleEditForm = (itemId) => {
     setIsOpenForm((prev) => (prev === itemId ? null : itemId));
   };
 
-    const deleteCab = (idCabinets) => {
-      setCabinets((prevState) =>
-        prevState.filter((cabinet) => cabinet.key !== idCabinets)
-      );
-      if (cabinets.length) {
-        localStorage.clear();
-      }
-    };
-
+  const deleteCab = (idCabinets) => {
+    setCabinets((prevState) =>
+      prevState.filter((cabinet) => cabinet.key !== idCabinets)
+    );
+    if (cabinets.length) {
+      localStorage.clear();
+    }
+  };
 
   const handleAddElement = () => {
     const uniqueKey = nanoid();
@@ -40,18 +38,14 @@ export const MainCabinet = ({
           className={css.addInfoBtn}
           onClick={() => toggleEditForm(uniqueKey)}
         >
-          <IconContext.Provider value={{ size: "1.5em" }}>
-            <IoAdd />
-          </IconContext.Provider>
+          <IoAdd />
         </button>
         <button
           className={css.addInfoBtn}
           type="button"
           onClick={() => deleteCab(uniqueKey, cabinets, setCabinets)}
         >
-          <IconContext.Provider value={{ size: "1.5em" }}>
-            <IoBan />
-          </IconContext.Provider>
+          <IoBan />
         </button>
       </div>
     );
@@ -71,29 +65,34 @@ export const MainCabinet = ({
       >
         Добавить элемент
       </button>
+      {cabinets && cabinets.length ? (
+        <>
+          {cabinets.map(({ element, key }) => (
+            <div key={key} className={css.boxWrapper}>
+              {element}
 
-      {cabinets.map(({ element, key }) => (
-        <div key={key} className={css.boxWrapper}>
-          {element}
-          {isOpenForm === key && (
-            <FormCard
-              onSubmit={(id, unikId, name, breed, years, birthday) =>
-                onSubmit(id, unikId, name, breed, years, birthday)
-              }
-              id={key}
-              unikId={nanoid()}
-              onClose={() => setIsOpenForm(null)}
-            />
-          )}
+              {isOpenForm === key && (
+                <FormCard
+                  onSubmit={(id, unikId, name, breed, years, birthday) =>
+                    onSubmit(id, unikId, name, breed, years, birthday)
+                  }
+                  id={key}
+                  unikId={nanoid()}
+                  onClose={() => setIsOpenForm(null)}
+                />
+              )}
 
-          <CardItem
-            onSubmit={onSubmit}
-            handleEditSubmit={handleEditSubmit}
-            deleteInfoCats={deleteInfoCats}
-            items={catsInfo.filter((cabinet) => cabinet.id === key) || []}
-          />
-        </div>
-      ))}
+              <CardItem
+                onSubmit={onSubmit}
+                handleEditSubmit={handleEditSubmit}
+                deleteInfoCats={deleteInfoCats}
+                items={catsInfo.filter((cabinet) => cabinet.id === key) || []}
+              />
+            </div>
+          ))}
+        </>
+      ) : null}
     </div>
   );
 };
+// localStorage.clear();
