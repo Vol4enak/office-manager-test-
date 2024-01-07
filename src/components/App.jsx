@@ -8,15 +8,16 @@ export function App() {
   const [btnText, setBtnText] = useState(true);
   const [catsInfo, setCatsInfo] = useState([]);
   const deleteInfoCats = (idCatsInfo) => {
+    console.log(123)
     setCatsInfo((prevState) =>
-      prevState.filter((catsInfo) => catsInfo.unikId !== idCatsInfo)
+      prevState.filter((catsInfo) => catsInfo.id !== idCatsInfo)
     );
     if (catsInfo.length) {
-      localStorage.clear();
+      localStorage.removeItem("catsInfo");
     }
   };
   const formSubmitHandler = (id, unikId, name, breed, years, birthday) => {
-    console.log(birthday);
+
     const cabinet = {
       id,
       unikId,

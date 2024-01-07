@@ -29,17 +29,13 @@ export const CardItem = ({
     }
   };
 
-  // const toggleEditForm = (itemId) => {
-  //   setIsOpenForm((prev) => (prev === itemId ? null : itemId));
-  // };
-
   return (
     <div className={style.container}>
-      
       {items && items.length ? (
         <ul className={style.list}>
           {items.map(({ id, unikId, birthday, breed, name, years }) => (
             <li key={unikId} className={style.listItem}>
+              <p>{items.length - 1}.</p>
               <p>{name}</p>
               <p>{breed}</p>
               <p>{years + " " + getYearWordForm(years)}</p>

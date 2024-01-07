@@ -1,5 +1,5 @@
 import css from "../СardList/CardList.module.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { IoAdd, IoBan } from "react-icons/io5";
 
 import { FormCard } from "../formCard/formCard";
@@ -20,40 +20,40 @@ export const MainCabinet = ({
   };
 
   const deleteCab = (idCabinets) => {
+    deleteInfoCats(idCabinets);
     setCabinets((prevState) =>
       prevState.filter((cabinet) => cabinet.key !== idCabinets)
     );
     if (cabinets.length) {
-      localStorage.clear();
+      localStorage.removeItem("cabinets");
     }
   };
 
+  useEffect(() => {
+    if (!cabinets.length) {
+      return;
+    }
+
+    localStorage.setItem("cabinets", JSON.stringify(cabinets));
+  }, [cabinets]);
+
+  useEffect(() => {
+    const cabinet = localStorage.getItem("cabinets");
+    if (cabinet) {
+      const parsetCab = JSON.parse(cabinet);
+      setCabinets(parsetCab);
+    }
+  }, []);
+
   const handleAddElement = () => {
     const uniqueKey = nanoid();
-    const newElement = (
-      <div key={uniqueKey} className={css.cabBox}>
-        <h2>Kaбінет</h2>
-        <button
-          type="button"
-          className={css.addInfoBtn}
-          onClick={() => toggleEditForm(uniqueKey)}
-        >
-          <IoAdd />
-        </button>
-        <button
-          className={css.addInfoBtn}
-          type="button"
-          onClick={() => deleteCab(uniqueKey, cabinets, setCabinets)}
-        >
-          <IoBan />
-        </button>
-      </div>
-    );
 
-    setCabinets((prevcabinets) => [
-      ...prevcabinets,
-      { element: newElement, key: uniqueKey },
-    ]);
+    const newCabinet = {
+      id: uniqueKey,
+      key: cabinets.length + 1,
+    };
+
+    setCabinets((prevCabinets) => [...prevCabinets, newCabinet]);
   };
 
   return (
@@ -67,9 +67,25 @@ export const MainCabinet = ({
       </button>
       {cabinets && cabinets.length ? (
         <>
-          {cabinets.map(({ element, key }) => (
-            <div key={key} className={css.boxWrapper}>
-              {element}
+          {cabinets.map(({ id, key }) => (
+            <div key={id} className={css.boxWrapper}>
+              <div key={key} className={css.cabBox}>
+                <h2>{"Kaбінет " + key}</h2>
+                <button
+                  type="button"
+                  className={css.addInfoBtn}
+                  onClick={() => toggleEditForm(key)}
+                >
+                  <IoAdd />
+                </button>
+                <button
+                  className={css.addInfoBtn}
+                  type="button"
+                  onClick={() => deleteCab(key)}
+                >
+                  <IoBan />
+                </button>
+              </div>
 
               {isOpenForm === key && (
                 <FormCard
