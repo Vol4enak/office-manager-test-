@@ -1,8 +1,9 @@
 import css from "../formCard.module.css";
 import { useState } from "react";
-import { GetFact } from "../getFact";
+// import { GetFact } from "../getFact";
 export const EditForm = ({
   handleEditSubmit,
+  unikId,
   onClose,
   id,
 }) => {
@@ -34,7 +35,7 @@ export const EditForm = ({
 
   const handleEdit = (e) => {
     e.preventDefault();
-    handleEditSubmit(id, name, breed, years, birthday);
+    handleEditSubmit(id,unikId, name, breed, years, birthday);
     
     onClose(); // Закрываем модальное окно (если используется)
   };
@@ -83,7 +84,7 @@ export const EditForm = ({
           </button>
         </form>
       </div>
-      <GetFact />
+      {/* <GetFact /> */}
     </div>
   );
 };

@@ -1,28 +1,27 @@
 import css from "./App.module.css";
-// import style from "./СardList/CardList.module.css";
 import { useEffect, useState } from "react";
-// import { IoBan } from "react-icons/io5";
-// import { MdEdit } from "react-icons/md";
-// import { IconContext } from "react-icons";
 import { Aside } from "./aside/aside";
-// import { CardList } from "./СardList/СardList";
 import { TopBar } from "./topBar/topBar";
-import { FormCard } from "./formCard/formCard";
 import { MainCabinet } from "./mainCabinet/mainCabinet";
-// import { nanoid } from "nanoid";
 
 export function App() {
   const [btnText, setBtnText] = useState(true);
-  const [cabinets, setCabinets] = useState([]);
-  const deleteCad = (idCadinet) => {
-    console.log(idCadinet + "на удалении");
-    setCabinets((prevState) =>
-      prevState.filter((cadinet) => cadinet.unikId !== idCadinet)
+  const [catsInfo, setCatsInfo] = useState([]);
+  const deleteInfoCats = (idCatsInfo) => {
+    setCatsInfo((prevState) =>
+      prevState.filter((catsInfo) => catsInfo.unikId !== idCatsInfo)
     );
-    if (cabinets.length) {
+    if (catsInfo.length) {
       localStorage.clear();
     }
   };
+  //   const deleteInfoCats = (unikid) => {
+  //     deleteCabinet(unikid, catsInfo, setCatsInfo);
+  //   };
+  // const deleteCab = (unikid, cabinets, setCabinets) => {
+  //   console.log(cabinets + "кабинеты в функции");
+  //   deleteCabinet(unikid, cabinets, setCabinets);
+  // };
   const formSubmitHandler = (id, unikId, name, breed, years, birthday) => {
     console.log(birthday);
     const cabinet = {
@@ -34,33 +33,33 @@ export function App() {
       years,
       birthday,
     };
-    console.log(cabinet);
-    setCabinets([cabinet, ...cabinets]);
+
+    setCatsInfo([cabinet, ...catsInfo]);
   };
 
-  const handleEditSubmit = (id, name, breed, years, birthday) => {
-    setCabinets((prevItems) =>
+  const handleEditSubmit = (id, unikId, name, breed, years, birthday) => {
+    setCatsInfo((prevItems) =>
       prevItems.map((item) =>
         item.id === id
-          ? { ...item, name, breed, years, birthday, edit: false }
+          ? { ...item, unikId, name, breed, years, birthday, edit: false }
           : item
       )
     );
   };
 
   useEffect(() => {
-    if (!cabinets.length) {
+    if (!catsInfo.length) {
       return;
     }
 
-    localStorage.setItem("cabinets", JSON.stringify(cabinets));
-  }, [cabinets]);
+    localStorage.setItem("catsInfo", JSON.stringify(catsInfo));
+  }, [catsInfo]);
 
   useEffect(() => {
-    const cabinet = localStorage.getItem("cabinets");
+    const cabinet = localStorage.getItem("catsInfo");
     if (cabinet) {
       const parsetCab = JSON.parse(cabinet);
-      setCabinets(parsetCab);
+      setCatsInfo(parsetCab);
     }
   }, []);
 
@@ -77,11 +76,12 @@ export function App() {
       <TopBar />
 
       <MainCabinet
-        cabinets={cabinets}
-        onDelete={deleteCad}
+        catsInfo={catsInfo}
+        deleteInfoCats={deleteInfoCats}
         onSubmit={formSubmitHandler}
         handleEditSubmit={handleEditSubmit}
       />
     </div>
   );
 }
+// localStorage.clear();

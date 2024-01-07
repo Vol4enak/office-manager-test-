@@ -1,13 +1,24 @@
+import { nanoid } from "nanoid";
 import { IoBan } from "react-icons/io5";
 import { MdEdit } from "react-icons/md";
 import { IconContext } from "react-icons";
 import style from "../CardList.module.css";
-import { useState } from "react";
-import { GetFact } from "../../formCard/getFact";
 
-export const CardItem = ({ items, onDelete, handleEditSubmit }) => {
+import { useState } from "react";
+import { EditForm } from "../../formCard/editForm/editForm";
+// import { GetFact } from "../../formCard/getFact";
+
+export const CardItem = ({
+  items,
+  deleteInfoCats,
+  handleEditSubmit,
+  onSubmit,
+}) => {
   const [isOpenForm, setIsOpenForm] = useState(null);
 
+  const toggleEditForm = (itemId) => {
+    setIsOpenForm((prev) => (prev === itemId ? null : itemId));
+  };
   const getYearWordForm = (numberYears) => {
     if (numberYears !== 1) {
       return "рік";
@@ -18,9 +29,9 @@ export const CardItem = ({ items, onDelete, handleEditSubmit }) => {
     }
   };
 
-  const toggleEditForm = (itemId) => {
-    setIsOpenForm((prev) => (prev === itemId ? null : itemId));
-  };
+  // const toggleEditForm = (itemId) => {
+  //   setIsOpenForm((prev) => (prev === itemId ? null : itemId));
+  // };
 
   return (
     <div className={style.container}>
@@ -37,7 +48,7 @@ export const CardItem = ({ items, onDelete, handleEditSubmit }) => {
                 className={style.button}
                 type="button"
                 onClick={() => {
-                  onDelete(unikId);
+                  deleteInfoCats(unikId);
                 }}
               >
                 <IconContext.Provider value={{ size: "1.5em" }}>
@@ -55,7 +66,17 @@ export const CardItem = ({ items, onDelete, handleEditSubmit }) => {
                   <MdEdit />
                 </IconContext.Provider>
               </button>
-
+              {isOpenForm === unikId && (
+                <EditForm
+                  onSubmit={(id, unikId, name, breed, years, birthday) =>
+                    onSubmit(id, unikId, name, breed, years, birthday)
+                  }
+                  id={id}
+                  unikId={nanoid()}
+                  handleEditSubmit={handleEditSubmit}
+                  onClose={() => setIsOpenForm(null)}
+                />
+              )}
               {/* <GetFact items={items} />  */}
             </li>
           ))}
