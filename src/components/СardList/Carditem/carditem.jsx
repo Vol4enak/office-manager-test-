@@ -1,5 +1,13 @@
+import { IoBan } from "react-icons/io5";
+import { MdEdit } from "react-icons/md";
+import { IconContext } from "react-icons";
 import style from "../CardList.module.css";
-export const CardItem = ({ item }) => {
+import { useState } from "react";
+import { GetFact } from "../../formCard/getFact";
+
+export const CardItem = ({ items, onDelete, handleEditSubmit }) => {
+  const [isOpenForm, setIsOpenForm] = useState(null);
+
   const getYearWordForm = (numberYears) => {
     if (numberYears !== 1) {
       return "рік";
@@ -10,18 +18,45 @@ export const CardItem = ({ item }) => {
     }
   };
 
+  const toggleEditForm = (itemId) => {
+    setIsOpenForm((prev) => (prev === itemId ? null : itemId));
+  };
+
   return (
     <div className={style.container}>
-      {item.length ? (
+      {items && items.length ? (
         <ul className={style.list}>
-          {item.map(({ id, birthday, breed, name, years }, index) => (
-            <li key={id} className={style.listItem}>
-              <div className={style.box}>
-                <p>{name}</p>
-                <p>{breed}</p>
-                <p>{years + " " + getYearWordForm(years)}</p>
-                <p>{birthday}</p>
-              </div>
+          {items.map(({ id, unikId, birthday, breed, name, years }) => (
+            <li key={unikId} className={style.listItem}>
+              <p>{name}</p>
+              <p>{breed}</p>
+              <p>{years + " " + getYearWordForm(years)}</p>
+              <p>{birthday}</p>
+
+              <button
+                className={style.button}
+                type="button"
+                onClick={() => {
+                  onDelete(unikId);
+                }}
+              >
+                <IconContext.Provider value={{ size: "1.5em" }}>
+                  <IoBan />
+                </IconContext.Provider>
+              </button>
+              <button
+                className={style.button}
+                type="button"
+                onClick={() => {
+                  toggleEditForm(unikId);
+                }}
+              >
+                <IconContext.Provider value={{ size: "1.5em" }}>
+                  <MdEdit />
+                </IconContext.Provider>
+              </button>
+
+              {/* <GetFact items={items} />  */}
             </li>
           ))}
         </ul>

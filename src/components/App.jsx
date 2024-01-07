@@ -9,21 +9,25 @@ import { Aside } from "./aside/aside";
 import { TopBar } from "./topBar/topBar";
 import { FormCard } from "./formCard/formCard";
 import { MainCabinet } from "./mainCabinet/mainCabinet";
+// import { nanoid } from "nanoid";
 
 export function App() {
   const [btnText, setBtnText] = useState(true);
   const [cabinets, setCabinets] = useState([]);
   const deleteCad = (idCadinet) => {
+    console.log(idCadinet + "на удалении");
     setCabinets((prevState) =>
-      prevState.filter((cadinet) => cadinet.id !== idCadinet)
+      prevState.filter((cadinet) => cadinet.unikId !== idCadinet)
     );
     if (cabinets.length) {
       localStorage.clear();
     }
   };
-  const formSubmitHandler = (id, name, breed, years, birthday) => {
+  const formSubmitHandler = (id, unikId, name, breed, years, birthday) => {
+    console.log(birthday);
     const cabinet = {
       id,
+      unikId,
       edit: false,
       name,
       breed,
@@ -71,10 +75,9 @@ export function App() {
         {btnText ? "hide text" : "show text"}
       </button>
       <TopBar />
-      {false && <FormCard onSubmit={formSubmitHandler} />}
 
       <MainCabinet
-        item={cabinets}
+        cabinets={cabinets}
         onDelete={deleteCad}
         onSubmit={formSubmitHandler}
         handleEditSubmit={handleEditSubmit}

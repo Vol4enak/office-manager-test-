@@ -1,9 +1,3 @@
-.container {
-  overflow-y: scroll;
-
-  height: 280px;
-}
-
 .reverseList {
   display: flex;
 }
@@ -11,16 +5,15 @@
   display: flex;
   flex-direction: column-reverse;
 }
-.box {
-  display: flex;
 
-  padding-top: 5px;
-}
 .box .helperBox {
   background-color: red;
 }
 .listItem {
   margin-top: 20px;
+  display: flex;
+
+  padding-top: 5px;
 }
 .listItem p {
   margin-right: 30px;

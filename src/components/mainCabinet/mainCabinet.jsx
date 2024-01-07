@@ -1,23 +1,22 @@
 import css from "../СardList/CardList.module.css";
 import { useState } from "react";
-import { IoBan, IoAdd } from "react-icons/io5";
-import { MdEdit } from "react-icons/md";
+import { IoAdd } from "react-icons/io5";
 import { IconContext } from "react-icons";
-import { CardItem } from "../СardList/Carditem/carditem.jsx";
-// import { EditForm } from "../formCard/editForm/editForm";
 import { FormCard } from "../formCard/formCard";
 import { nanoid } from "nanoid";
-// import { GetFact } from "../formCard/getFact";
+import { CardItem } from "../СardList/Carditem/carditem.jsx";
 
-export const MainCabinet = ({ item, onDelete, onSubmit, handleEditSubmit }) => {
+export const MainCabinet = ({
+  cabinets,
+  onSubmit,
+  onDelete,
+  handleEditSubmit,
+}) => {
   const [elements, setElements] = useState([]);
   const [isOpenForm, setIsOpenForm] = useState(null);
+
   const toggleEditForm = (itemId) => {
-    if (isOpenForm === itemId) {
-      setIsOpenForm(null);
-    } else {
-      setIsOpenForm(itemId);
-    }
+    setIsOpenForm((prev) => (prev === itemId ? null : itemId));
   };
 
   const handleAddElement = () => {
@@ -28,9 +27,7 @@ export const MainCabinet = ({ item, onDelete, onSubmit, handleEditSubmit }) => {
         <button
           type="button"
           className={css.addInfoBtn}
-          onClick={() => {
-            toggleEditForm(uniqueKey);
-          }}
+          onClick={() => toggleEditForm(uniqueKey)}
         >
           <IconContext.Provider value={{ size: "1.5em" }}>
             <IoAdd />
@@ -39,59 +36,44 @@ export const MainCabinet = ({ item, onDelete, onSubmit, handleEditSubmit }) => {
       </div>
     );
 
-    setElements([...elements, { element: newElement, key: uniqueKey }]);
-
-    setIsOpenForm(elements.length); // Открываем форму для нового элемента
+    setElements((prevElements) => [
+      ...prevElements,
+      { element: newElement, key: uniqueKey },
+    ]);
   };
 
   return (
     <div className={css.wrapper}>
-      <button className={css.addBtn} type="button" onClick={handleAddElement}>
+      <button
+        className={css.addBtn}
+        type="button"
+        onClick={() => handleAddElement(nanoid())}
+      >
         Добавить элемент
       </button>
 
-      {elements.map(({ element, key }) => {
-        return (
-          <div key={key} className={css.boxWrapper}>
-            {element}
+      {elements.map(({ element, key }) => (
+        <div key={key} className={css.boxWrapper}>
+          {element}
+          {isOpenForm === key && (
+            <FormCard
+              onSubmit={(id, unikId, name, breed, years, birthday) =>
+                onSubmit(id, unikId, name, breed, years, birthday)
+              }
+              id={key}
+              unikId={nanoid()}
+              onClose={() => setIsOpenForm(null)}
+            />
+          )}
 
-            {isOpenForm === key && (
-              <FormCard
-                handleEditSubmit={handleEditSubmit}
-                onSubmit={onSubmit}
-                id={key}
-                onClose={setIsOpenForm}
-              />
-            )}
-            <CardItem item={item} />
-          </div>
-        );
-      })}
+          <CardItem
+            handleEditSubmit={handleEditSubmit}
+            onDelete={onDelete}
+            items={cabinets.filter((cabinet) => cabinet.id === key) || []}
+          />
+        </div>
+      ))}
     </div>
   );
 };
-
-// <button
-//         className={css.button}
-//         type="button"
-//         onClick={() => {
-//           onDelete(id);
-//           zxc(id);
-//         }}
-//       >
-//         <IconContext.Provider value={{ size: "1.5em" }}>
-//           <IoBan />
-//         </IconContext.Provider>
-//       </button>
-//       <button
-//         className={css.button}
-//         type="button"
-//         onClick={() => {
-//           toggleEditForm(id);
-//         }}
-//       >
-//         <IconContext.Provider value={{ size: "1.5em" }}>
-//           <MdEdit />
-//         </IconContext.Provider>
-//       </button>
-//       {/* <GetFact /> */}
+// localStorage.clear()

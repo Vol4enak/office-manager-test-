@@ -2,7 +2,7 @@ import { useState } from "react";
 // import {GetFact} from "./getFact"
 import css from "./formCard.module.css";
 
-export const FormCard = ({ onSubmit, onClose, id }) => {
+export const FormCard = ({ onSubmit, onClose, id, unikId }) => {
   const [name, setName] = useState("");
   const [breed, setBreed] = useState("");
   const [years, setYears] = useState("");
@@ -30,7 +30,7 @@ export const FormCard = ({ onSubmit, onClose, id }) => {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSubmit(id, name, breed, years, birthday);
+    onSubmit(id, unikId, name, breed, years, birthday);
     onClose(null);
     reset();
   };

@@ -2,7 +2,7 @@ import css from "../СardList/CardList.module.css";
 import { useState, useEffect } from "react";
 import api from "../service/api";
 
-export const GetFact = () => {
+export const GetFact = ({items}) => {
   const [data, setData] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -20,7 +20,7 @@ export const GetFact = () => {
     };
 
     fetchData();
-  }, []);
+  }, [items]);
 
   return (
     <div>
