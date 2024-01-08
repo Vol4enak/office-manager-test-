@@ -13,6 +13,7 @@ export const CardItem = ({
   deleteInfoCats,
   handleEditSubmit,
   onSubmit,
+  isOpenAddForm,
 }) => {
   const [isOpenForm, setIsOpenForm] = useState(null);
 
@@ -28,41 +29,42 @@ export const CardItem = ({
       return "років";
     }
   };
-
   return (
     <div className={style.container}>
       {items && items.length ? (
         <ul className={style.list}>
           {items.map(({ id, unikId, birthday, breed, name, years }) => (
             <li key={unikId} className={style.listItem}>
-              <p>{items.length - 1}.</p>
-              <p>{name}</p>
-              <p>{breed}</p>
-              <p>{years + " " + getYearWordForm(years)}</p>
-              <p>{birthday}</p>
+              <div className={style.listItemBox}>
+                <p>{items.length - 1}.</p>
+                <p>{name}</p>
+                <p>{breed}</p>
+                <p>{years + " " + getYearWordForm(years)}</p>
+                <p>{birthday}</p>
 
-              <button
-                className={style.button}
-                type="button"
-                onClick={() => {
-                  deleteInfoCats(unikId);
-                }}
-              >
-                <IconContext.Provider value={{ size: "1.5em" }}>
-                  <IoBan />
-                </IconContext.Provider>
-              </button>
-              <button
-                className={style.button}
-                type="button"
-                onClick={() => {
-                  toggleEditForm(unikId);
-                }}
-              >
-                <IconContext.Provider value={{ size: "1.5em" }}>
-                  <MdEdit />
-                </IconContext.Provider>
-              </button>
+                <button
+                  className={style.button}
+                  type="button"
+                  onClick={() => {
+                    deleteInfoCats(unikId);
+                  }}
+                >
+                  <IconContext.Provider value={{ size: "1.5em" }}>
+                    <IoBan />
+                  </IconContext.Provider>
+                </button>
+                <button
+                  className={style.button}
+                  type="button"
+                  onClick={() => {
+                    toggleEditForm(unikId);
+                  }}
+                >
+                  <IconContext.Provider value={{ size: "1.5em" }}>
+                    <MdEdit />
+                  </IconContext.Provider>
+                </button>
+              </div>
               {isOpenForm === unikId && (
                 <EditForm
                   onSubmit={(id, unikId, name, breed, years, birthday) =>

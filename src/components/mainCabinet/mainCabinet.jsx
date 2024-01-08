@@ -15,6 +15,7 @@ export const MainCabinet = ({
 }) => {
   const [cabinets, setCabinets] = useState([]);
   const [isOpenForm, setIsOpenForm] = useState(null);
+  const [numOfCab, setNumOfCab] = useState(1);
   const toggleEditForm = (itemId) => {
     setIsOpenForm((prev) => (prev === itemId ? null : itemId));
   };
@@ -41,18 +42,20 @@ export const MainCabinet = ({
     const cabinet = localStorage.getItem("cabinets");
     if (cabinet) {
       const parsetCab = JSON.parse(cabinet);
+      setNumOfCab(parsetCab[parsetCab.length - 1].numOfCab + 1);
       setCabinets(parsetCab);
     }
   }, []);
 
   const handleAddElement = () => {
     const uniqueKey = nanoid();
-
+    const uniqueId = nanoid();
     const newCabinet = {
-      id: uniqueKey,
-      key: cabinets.length + 1,
+      id: uniqueId,
+      key: uniqueKey,
+      numOfCab,
     };
-
+    setNumOfCab((prevNum) => (prevNum += 1));
     setCabinets((prevCabinets) => [...prevCabinets, newCabinet]);
   };
 
@@ -67,10 +70,10 @@ export const MainCabinet = ({
       </button>
       {cabinets && cabinets.length ? (
         <>
-          {cabinets.map(({ id, key }) => (
+          {cabinets.map(({ id, key, numOfCab }) => (
             <div key={id} className={css.boxWrapper}>
               <div key={key} className={css.cabBox}>
-                <h2>{"Kaбінет " + key}</h2>
+                <h2>{"Kaбінет " + numOfCab}</h2>
                 <button
                   type="button"
                   className={css.addInfoBtn}
@@ -100,6 +103,7 @@ export const MainCabinet = ({
 
               <CardItem
                 onSubmit={onSubmit}
+                isOpenAddForm={isOpenForm}
                 handleEditSubmit={handleEditSubmit}
                 deleteInfoCats={deleteInfoCats}
                 items={catsInfo.filter((cabinet) => cabinet.id === key) || []}

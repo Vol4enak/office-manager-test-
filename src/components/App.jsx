@@ -8,7 +8,6 @@ export function App() {
   const [btnText, setBtnText] = useState(true);
   const [catsInfo, setCatsInfo] = useState([]);
   const deleteInfoCats = (idCatsInfo) => {
-    console.log(123)
     setCatsInfo((prevState) =>
       prevState.filter((catsInfo) => catsInfo.id !== idCatsInfo)
     );

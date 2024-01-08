@@ -12,7 +12,7 @@
 .listItem {
   margin-top: 20px;
   display: flex;
-
+  flex-direction: column;
   padding-top: 5px;
 }
 .listItem p {
@@ -52,7 +52,10 @@
   display: flex;
   gap: 15px;
 }
-.wrapper{
+.wrapper {
   overflow-y: scroll;
   height: 400px;
+}
+.listItemBox {
+  display: flex;
 }
