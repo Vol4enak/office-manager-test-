@@ -3,7 +3,8 @@
 }
 .list {
   display: flex;
-  flex-direction: column-reverse;
+  flex-direction: column;
+  padding-left: 20px;
 }
 
 .box .helperBox {
@@ -11,8 +12,6 @@
 }
 .listItem {
   margin-top: 20px;
-  display: flex;
-  flex-direction: column;
   padding-top: 5px;
 }
 .listItem p {
@@ -50,12 +49,22 @@
 
 .cabBox {
   display: flex;
+  justify-content: space-between;
+  outline: 1px solid black;
+  width: 800px;
+  padding: 5px;
   gap: 15px;
 }
 .wrapper {
   overflow-y: scroll;
   height: 400px;
+  padding-left: 30px;
 }
 .listItemBox {
   display: flex;
+  width: 600px;
+}
+.itemText {
+  text-align: left;
+  width: 80px;
 }

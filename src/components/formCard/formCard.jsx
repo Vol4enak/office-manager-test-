@@ -54,14 +54,16 @@ export const FormCard = ({ onSubmit, onClose, id, unikId }) => {
               placeholder="Введіть ім'я котика"
               required
             />
-            <input
-              type="text"
-              name="breed"
-              onChange={handelChange}
-              value={breed}
-              placeholder="Введіть породу"
-              required
-            />
+            <select name="breed" onChange={handelChange} value={breed} required>
+              <option value="" disabled hidden>
+                Виберіть породу
+              </option>
+              <option value="Мейн-кун">Мейн-кун</option>
+              <option value="Сфинкс">Сфинкс</option>
+              <option value="Бурма">Бурма</option>
+              <option value="Сноу-шу">Сноу-шу</option>
+              <option value="Манчкин">Манчкин</option>
+            </select>
             <input
               type="number"
               name="years"

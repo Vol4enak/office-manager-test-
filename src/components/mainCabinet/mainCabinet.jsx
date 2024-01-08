@@ -115,4 +115,3 @@ export const MainCabinet = ({
     </div>
   );
 };
-// localStorage.clear();

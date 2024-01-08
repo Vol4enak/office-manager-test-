@@ -13,7 +13,6 @@ export const CardItem = ({
   deleteInfoCats,
   handleEditSubmit,
   onSubmit,
-  isOpenAddForm,
 }) => {
   const [isOpenForm, setIsOpenForm] = useState(null);
 
@@ -32,15 +31,16 @@ export const CardItem = ({
   return (
     <div className={style.container}>
       {items && items.length ? (
-        <ul className={style.list}>
+        <ol className={style.list}>
           {items.map(({ id, unikId, birthday, breed, name, years }) => (
             <li key={unikId} className={style.listItem}>
               <div className={style.listItemBox}>
-                <p>{items.length - 1}.</p>
-                <p>{name}</p>
-                <p>{breed}</p>
-                <p>{years + " " + getYearWordForm(years)}</p>
-                <p>{birthday}</p>
+                <p className={style.itemText}>{name}</p>
+                <p className={style.itemText}>{breed}</p>
+                <p className={style.itemText}>
+                  {years + " " + getYearWordForm(years)}
+                </p>
+                <p className={style.itemText}>{birthday}</p>
 
                 <button
                   className={style.button}
@@ -79,7 +79,7 @@ export const CardItem = ({
               {/* <GetFact items={items} />  */}
             </li>
           ))}
-        </ul>
+        </ol>
       ) : null}
     </div>
   );
