@@ -1,4 +1,4 @@
-.box {
+.topBarBox {
   display: flex;
   align-items: center;
   gap: 20px;
@@ -9,11 +9,11 @@
 .addButton {
   height: max-content;
 }
-.list {
+.topBarListItem {
   display: flex;
   gap: 20px;
 }
-.listItem label,
-.listItem input {
+.topBarListItem label,
+.topBarListItem input {
   vertical-align: middle;
 }

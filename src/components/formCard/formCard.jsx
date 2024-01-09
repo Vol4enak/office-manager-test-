@@ -18,7 +18,9 @@ export const FormCard = ({ onSubmit, onClose, id, unikId }) => {
         setBreed(value);
         break;
       case "years":
-        setYears(value);
+        if (/^\d*\.?\d{0,1}$/.test(value) || value === "") {
+          setYears(value);
+        }
         break;
       case "birthday":
         setBirthday(value);
@@ -32,61 +34,51 @@ export const FormCard = ({ onSubmit, onClose, id, unikId }) => {
     e.preventDefault();
     onSubmit(id, unikId, name, breed, years, birthday);
     onClose(null);
-    reset();
   };
 
-  const reset = () => {
-    setName("");
-    setBreed("");
-    setYears("");
-    setBirthday("");
-  };
   return (
     <>
       <div className={css.formBox}>
-        <div className={css.formbox}>
-          <form onSubmit={handleSubmit}>
-            <input
-              type="text"
-              name="name"
-              onChange={handelChange}
-              value={name}
-              placeholder="Введіть ім'я котика"
-              required
-            />
-            <select name="breed" onChange={handelChange} value={breed} required>
-              <option value="" disabled hidden>
-                Виберіть породу
-              </option>
-              <option value="Мейн-кун">Мейн-кун</option>
-              <option value="Сфинкс">Сфинкс</option>
-              <option value="Бурма">Бурма</option>
-              <option value="Сноу-шу">Сноу-шу</option>
-              <option value="Манчкин">Манчкин</option>
-            </select>
-            <input
-              type="number"
-              name="years"
-              onChange={handelChange}
-              value={years}
-              min="1"
-              placeholder="Скільки йому років?"
-              required
-            />
-            <input
-              type="date"
-              onChange={handelChange}
-              value={birthday}
-              name="birthday"
-              id=""
-              required
-            />
+        <form onSubmit={handleSubmit}>
+          <input
+            type="text"
+            name="name"
+            onChange={handelChange}
+            value={name}
+            placeholder="Введіть ім'я котика"
+            required
+          />
+          <select name="breed" onChange={handelChange} value={breed} required>
+            <option value="" disabled hidden>
+              Виберіть породу
+            </option>
+            <option value="Мейн-кун">Мейн-кун</option>
+            <option value="Сфинкс">Сфинкс</option>
+            <option value="Бурма">Бурма</option>
+            <option value="Сноу-шу">Сноу-шу</option>
+            <option value="Манчкин">Манчкин</option>
+          </select>
+          <input
+            type="number"
+            name="years"
+            onChange={handelChange}
+            value={years}
+            placeholder="Скільки йому років?"
+            required
+          />
+          <input
+            type="date"
+            onChange={handelChange}
+            value={birthday}
+            name="birthday"
+            id=""
+            required
+          />
 
-            <button type="submit" onSubmit={onSubmit}>
-              Add info
-            </button>
-          </form>
-        </div>
+          <button type="submit" onSubmit={onSubmit}>
+            Add info
+          </button>
+        </form>
       </div>
     </>
   );
