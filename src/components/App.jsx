@@ -7,20 +7,19 @@ import { MainCabinet } from "./mainCabinet/mainCabinet";
 export function App() {
   const [btnText, setBtnText] = useState(true);
   const [catsInfo, setCatsInfo] = useState([]);
+
   const deleteInfoCats = (idCatsInfo) => {
     setCatsInfo((prevState) =>
-      prevState.filter((catsInfo) => catsInfo.id !== idCatsInfo)
+      prevState.filter((catsInfo) => catsInfo.unikId !== idCatsInfo)
     );
     if (catsInfo.length) {
       localStorage.removeItem("catsInfo");
     }
   };
   const formSubmitHandler = (id, unikId, name, breed, years, birthday) => {
-
     const cabinet = {
       id,
       unikId,
-      edit: false,
       name,
       breed,
       years,
@@ -33,8 +32,8 @@ export function App() {
   const handleEditSubmit = (id, unikId, name, breed, years, birthday) => {
     setCatsInfo((prevItems) =>
       prevItems.map((item) =>
-        item.id === id
-          ? { ...item, unikId, name, breed, years, birthday, edit: false }
+        item.unikId === unikId
+          ? { ...item, id, name, breed, years, birthday }
           : item
       )
     );

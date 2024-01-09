@@ -1,4 +1,3 @@
-import { nanoid } from "nanoid";
 import { IoBan } from "react-icons/io5";
 import { MdEdit } from "react-icons/md";
 import { IconContext } from "react-icons";
@@ -6,15 +5,11 @@ import style from "../CardList.module.css";
 
 import { useState } from "react";
 import { EditForm } from "../../formCard/editForm/editForm";
+import { FormCard } from "../../formCard/formCard";
+
 // import { GetFact } from "../../formCard/getFact";
 
-export const CardItem = ({
-  items,
-  deleteInfoCats,
-  handleEditSubmit,
-  onSubmit,
-  isOpenAddForm,
-}) => {
+export const CardItem = ({ items, deleteInfoCats, handleEditSubmit }) => {
   const [isOpenForm, setIsOpenForm] = useState(null);
 
   const toggleEditForm = (itemId) => {
@@ -32,15 +27,16 @@ export const CardItem = ({
   return (
     <div className={style.container}>
       {items && items.length ? (
-        <ul className={style.list}>
+        <ol className={style.list}>
           {items.map(({ id, unikId, birthday, breed, name, years }) => (
             <li key={unikId} className={style.listItem}>
               <div className={style.listItemBox}>
-                <p>{items.length - 1}.</p>
-                <p>{name}</p>
-                <p>{breed}</p>
-                <p>{years + " " + getYearWordForm(years)}</p>
-                <p>{birthday}</p>
+                <p className={style.itemText}>{name}</p>
+                <p className={style.itemText}>{breed}</p>
+                <p className={style.itemText}>
+                  {years + " " + getYearWordForm(years)}
+                </p>
+                <p className={style.itemText}>{birthday}</p>
 
                 <button
                   className={style.button}
@@ -67,11 +63,8 @@ export const CardItem = ({
               </div>
               {isOpenForm === unikId && (
                 <EditForm
-                  onSubmit={(id, unikId, name, breed, years, birthday) =>
-                    onSubmit(id, unikId, name, breed, years, birthday)
-                  }
                   id={id}
-                  unikId={nanoid()}
+                  unikId={unikId}
                   handleEditSubmit={handleEditSubmit}
                   onClose={() => setIsOpenForm(null)}
                 />
@@ -79,7 +72,7 @@ export const CardItem = ({
               {/* <GetFact items={items} />  */}
             </li>
           ))}
-        </ul>
+        </ol>
       ) : null}
     </div>
   );

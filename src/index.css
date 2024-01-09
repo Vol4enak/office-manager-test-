@@ -6,14 +6,14 @@ body {
   background-color: #fef9f9;
   margin: 0;
 
-  font-family: 'Manrope';
+  font-family: "Manrope";
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #111111;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
 
@@ -31,12 +31,11 @@ a {
   text-decoration: none;
 }
 
-ul,
-ol {
+ul,ol {
   margin: 0;
   padding: 0;
 }
 
-li {
+ul li {
   list-style: none;
 }

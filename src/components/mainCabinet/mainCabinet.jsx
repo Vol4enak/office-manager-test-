@@ -1,6 +1,6 @@
 import css from "../СardList/CardList.module.css";
 import { useState, useEffect } from "react";
-import { IoAdd, IoBan } from "react-icons/io5";
+import { IoAdd } from "react-icons/io5";
 
 import { FormCard } from "../formCard/formCard";
 import { nanoid } from "nanoid";
@@ -20,15 +20,6 @@ export const MainCabinet = ({
     setIsOpenForm((prev) => (prev === itemId ? null : itemId));
   };
 
-  const deleteCab = (idCabinets) => {
-    deleteInfoCats(idCabinets);
-    setCabinets((prevState) =>
-      prevState.filter((cabinet) => cabinet.key !== idCabinets)
-    );
-    if (cabinets.length) {
-      localStorage.removeItem("cabinets");
-    }
-  };
 
   useEffect(() => {
     if (!cabinets.length) {
@@ -81,13 +72,7 @@ export const MainCabinet = ({
                 >
                   <IoAdd />
                 </button>
-                <button
-                  className={css.addInfoBtn}
-                  type="button"
-                  onClick={() => deleteCab(key)}
-                >
-                  <IoBan />
-                </button>
+
               </div>
 
               {isOpenForm === key && (
@@ -102,8 +87,6 @@ export const MainCabinet = ({
               )}
 
               <CardItem
-                onSubmit={onSubmit}
-                isOpenAddForm={isOpenForm}
                 handleEditSubmit={handleEditSubmit}
                 deleteInfoCats={deleteInfoCats}
                 items={catsInfo.filter((cabinet) => cabinet.id === key) || []}
