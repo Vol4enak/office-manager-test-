@@ -1,4 +1,3 @@
-import { nanoid } from "nanoid";
 import { IoBan } from "react-icons/io5";
 import { MdEdit } from "react-icons/md";
 import { IconContext } from "react-icons";
@@ -6,14 +5,11 @@ import style from "../CardList.module.css";
 
 import { useState } from "react";
 import { EditForm } from "../../formCard/editForm/editForm";
+import { FormCard } from "../../formCard/formCard";
+
 // import { GetFact } from "../../formCard/getFact";
 
-export const CardItem = ({
-  items,
-  deleteInfoCats,
-  handleEditSubmit,
-  onSubmit,
-}) => {
+export const CardItem = ({ items, deleteInfoCats, handleEditSubmit }) => {
   const [isOpenForm, setIsOpenForm] = useState(null);
 
   const toggleEditForm = (itemId) => {
@@ -67,11 +63,8 @@ export const CardItem = ({
               </div>
               {isOpenForm === unikId && (
                 <EditForm
-                  onSubmit={(id, unikId, name, breed, years, birthday) =>
-                    onSubmit(id, unikId, name, breed, years, birthday)
-                  }
                   id={id}
-                  unikId={nanoid()}
+                  unikId={unikId}
                   handleEditSubmit={handleEditSubmit}
                   onClose={() => setIsOpenForm(null)}
                 />

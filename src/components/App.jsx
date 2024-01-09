@@ -8,7 +8,6 @@ export function App() {
   const [btnText, setBtnText] = useState(true);
   const [catsInfo, setCatsInfo] = useState([]);
 
-
   const deleteInfoCats = (idCatsInfo) => {
     setCatsInfo((prevState) =>
       prevState.filter((catsInfo) => catsInfo.unikId !== idCatsInfo)
@@ -31,15 +30,13 @@ export function App() {
   };
 
   const handleEditSubmit = (id, unikId, name, breed, years, birthday) => {
-    setCatsInfo((prevItems) => {
-      prevItems.map((item) => {
-        console.log(item.id);
-
-        return item.id === id
-          ? { ...item, id, unikId, name, breed, years, birthday }
-          : item;
-      });
-    });
+    setCatsInfo((prevItems) =>
+      prevItems.map((item) =>
+        item.unikId === unikId
+          ? { ...item, id, name, breed, years, birthday }
+          : item
+      )
+    );
   };
 
   useEffect(() => {
@@ -79,4 +76,4 @@ export function App() {
     </div>
   );
 }
-localStorage.clear();
+// localStorage.clear();

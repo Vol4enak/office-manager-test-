@@ -20,6 +20,7 @@ export const MainCabinet = ({
     setIsOpenForm((prev) => (prev === itemId ? null : itemId));
   };
 
+
   useEffect(() => {
     if (!cabinets.length) {
       return;
@@ -38,9 +39,11 @@ export const MainCabinet = ({
   }, []);
 
   const handleAddElement = () => {
+    const uniqueKey = nanoid();
     const uniqueId = nanoid();
     const newCabinet = {
       id: uniqueId,
+      key: uniqueKey,
       numOfCab,
     };
     setNumOfCab((prevNum) => (prevNum += 1));
@@ -58,34 +61,35 @@ export const MainCabinet = ({
       </button>
       {cabinets && cabinets.length ? (
         <>
-          {cabinets.map(({ id, numOfCab }) => (
+          {cabinets.map(({ id, key, numOfCab }) => (
             <div key={id} className={css.boxWrapper}>
-              <div key={id} className={css.cabBox}>
+              <div key={key} className={css.cabBox}>
                 <h2>{"Kaбінет " + numOfCab}</h2>
                 <button
                   type="button"
                   className={css.addInfoBtn}
-                  onClick={() => toggleEditForm(id)}
+                  onClick={() => toggleEditForm(key)}
                 >
                   <IoAdd />
                 </button>
+
               </div>
 
-              {isOpenForm === id && (
+              {isOpenForm === key && (
                 <FormCard
                   onSubmit={(id, unikId, name, breed, years, birthday) =>
                     onSubmit(id, unikId, name, breed, years, birthday)
                   }
-                  id={id}
+                  id={key}
                   unikId={nanoid()}
                   onClose={() => setIsOpenForm(null)}
                 />
               )}
+
               <CardItem
-                onSubmit={onSubmit}
                 handleEditSubmit={handleEditSubmit}
                 deleteInfoCats={deleteInfoCats}
-                items={catsInfo.filter((catInfo) => catInfo.id === id) || []}
+                items={catsInfo.filter((cabinet) => cabinet.id === key) || []}
               />
             </div>
           ))}
@@ -94,3 +98,4 @@ export const MainCabinet = ({
     </div>
   );
 };
+// localStorage.clear();
