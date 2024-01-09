@@ -1,6 +1,6 @@
 import css from "../СardList/CardList.module.css";
 import { useState, useEffect } from "react";
-import { IoAdd, IoBan } from "react-icons/io5";
+import { IoAdd } from "react-icons/io5";
 
 import { FormCard } from "../formCard/formCard";
 import { nanoid } from "nanoid";
@@ -18,16 +18,6 @@ export const MainCabinet = ({
   const [numOfCab, setNumOfCab] = useState(1);
   const toggleEditForm = (itemId) => {
     setIsOpenForm((prev) => (prev === itemId ? null : itemId));
-  };
-
-  const deleteCab = (idCabinets) => {
-    deleteInfoCats(idCabinets);
-    setCabinets((prevState) =>
-      prevState.filter((cabinet) => cabinet.key !== idCabinets)
-    );
-    if (cabinets.length) {
-      localStorage.removeItem("cabinets");
-    }
   };
 
   useEffect(() => {
@@ -48,11 +38,9 @@ export const MainCabinet = ({
   }, []);
 
   const handleAddElement = () => {
-    const uniqueKey = nanoid();
     const uniqueId = nanoid();
     const newCabinet = {
       id: uniqueId,
-      key: uniqueKey,
       numOfCab,
     };
     setNumOfCab((prevNum) => (prevNum += 1));
@@ -70,43 +58,34 @@ export const MainCabinet = ({
       </button>
       {cabinets && cabinets.length ? (
         <>
-          {cabinets.map(({ id, key, numOfCab }) => (
+          {cabinets.map(({ id, numOfCab }) => (
             <div key={id} className={css.boxWrapper}>
-              <div key={key} className={css.cabBox}>
+              <div key={id} className={css.cabBox}>
                 <h2>{"Kaбінет " + numOfCab}</h2>
                 <button
                   type="button"
                   className={css.addInfoBtn}
-                  onClick={() => toggleEditForm(key)}
+                  onClick={() => toggleEditForm(id)}
                 >
                   <IoAdd />
                 </button>
-                <button
-                  className={css.addInfoBtn}
-                  type="button"
-                  onClick={() => deleteCab(key)}
-                >
-                  <IoBan />
-                </button>
               </div>
 
-              {isOpenForm === key && (
+              {isOpenForm === id && (
                 <FormCard
                   onSubmit={(id, unikId, name, breed, years, birthday) =>
                     onSubmit(id, unikId, name, breed, years, birthday)
                   }
-                  id={key}
+                  id={id}
                   unikId={nanoid()}
                   onClose={() => setIsOpenForm(null)}
                 />
               )}
-
               <CardItem
                 onSubmit={onSubmit}
-                isOpenAddForm={isOpenForm}
                 handleEditSubmit={handleEditSubmit}
                 deleteInfoCats={deleteInfoCats}
-                items={catsInfo.filter((cabinet) => cabinet.id === key) || []}
+                items={catsInfo.filter((catInfo) => catInfo.id === id) || []}
               />
             </div>
           ))}

@@ -7,8 +7,9 @@ import { MainCabinet } from "./mainCabinet/mainCabinet";
 export function App() {
   const [btnText, setBtnText] = useState(true);
   const [catsInfo, setCatsInfo] = useState([]);
-  const deleteInfoCats = (idCatsInfo) => {
 
+
+  const deleteInfoCats = (idCatsInfo) => {
     setCatsInfo((prevState) =>
       prevState.filter((catsInfo) => catsInfo.unikId !== idCatsInfo)
     );
@@ -31,12 +32,13 @@ export function App() {
 
   const handleEditSubmit = (id, unikId, name, breed, years, birthday) => {
     setCatsInfo((prevItems) => {
-      console.log(prevItems);
-      prevItems.map((item) =>
-        item.id === id
-          ? { ...item, unikId, name, breed, years, birthday, edit: false }
-          : item
-      );
+      prevItems.map((item) => {
+        console.log(item.id);
+
+        return item.id === id
+          ? { ...item, id, unikId, name, breed, years, birthday }
+          : item;
+      });
     });
   };
 
@@ -77,4 +79,4 @@ export function App() {
     </div>
   );
 }
-// localStorage.clear();
+localStorage.clear();
