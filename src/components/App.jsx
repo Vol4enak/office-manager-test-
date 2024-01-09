@@ -7,6 +7,10 @@ import { MainCabinet } from "./mainCabinet/mainCabinet";
 export function App() {
   const [btnText, setBtnText] = useState(true);
   const [catsInfo, setCatsInfo] = useState([]);
+  const [checkboxes, setCheckboxes] = useState([
+    { id: 1, label: "Датою", isChecked: false },
+    { id: 2, label: "Віком", isChecked: false },
+  ]);
 
   const deleteInfoCats = (idCatsInfo) => {
     setCatsInfo((prevState) =>
@@ -59,15 +63,29 @@ export function App() {
     setBtnText(!btnText);
   };
 
+  const handleCheckboxChange = (id) => {
+    setCheckboxes((prevCheckboxes) =>
+      prevCheckboxes.map((checkbox) =>
+        checkbox.id === id
+          ? { ...checkbox, isChecked: !checkbox.isChecked }
+          : checkbox
+      )
+    );
+  };
+
   return (
     <div className={css.box}>
       <Aside isBtnActive={btnText} />
       <button className={css.toggleButton} onClick={handleBtn}>
         {btnText ? "hide text" : "show text"}
       </button>
-      <TopBar />
+      <TopBar
+        handleCheckboxChange={handleCheckboxChange}
+        checkboxes={checkboxes}
+      />
 
       <MainCabinet
+        checkboxes={checkboxes}
         catsInfo={catsInfo}
         deleteInfoCats={deleteInfoCats}
         onSubmit={formSubmitHandler}

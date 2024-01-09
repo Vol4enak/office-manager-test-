@@ -12,6 +12,7 @@ export const MainCabinet = ({
   onSubmit,
   deleteInfoCats,
   handleEditSubmit,
+  checkboxes,
 }) => {
   const [cabinets, setCabinets] = useState([]);
   const [isOpenForm, setIsOpenForm] = useState(null);
@@ -19,7 +20,6 @@ export const MainCabinet = ({
   const toggleEditForm = (itemId) => {
     setIsOpenForm((prev) => (prev === itemId ? null : itemId));
   };
-
 
   useEffect(() => {
     if (!cabinets.length) {
@@ -72,7 +72,6 @@ export const MainCabinet = ({
                 >
                   <IoAdd />
                 </button>
-
               </div>
 
               {isOpenForm === key && (
@@ -87,6 +86,7 @@ export const MainCabinet = ({
               )}
 
               <CardItem
+                checkboxes={checkboxes}
                 handleEditSubmit={handleEditSubmit}
                 deleteInfoCats={deleteInfoCats}
                 items={catsInfo.filter((cabinet) => cabinet.id === key) || []}
