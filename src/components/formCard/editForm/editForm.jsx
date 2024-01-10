@@ -1,6 +1,5 @@
 import css from "../formCard.module.css";
 import { useState } from "react";
-// import { GetFact } from "../getFact";
 export const EditForm = ({
   handleEditSubmit,
   unikId,
@@ -120,8 +119,6 @@ export const EditForm = ({
           </button>
         </div>
       </form>
-
-      {/* <GetFact /> */}
     </div>
   );
 };
