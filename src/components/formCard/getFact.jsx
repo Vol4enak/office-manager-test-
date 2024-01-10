@@ -1,8 +1,8 @@
 import css from "../СardList/CardList.module.css";
 import { useState, useEffect } from "react";
 import api from "../service/api";
-
-export const GetFact = ({items}) => {
+import { FormCard } from "./formCard";
+export const GetFact = () => {
   const [data, setData] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -20,17 +20,7 @@ export const GetFact = ({items}) => {
     };
 
     fetchData();
-  }, [items]);
+  }, []);
 
-  return (
-    <div>
-      {isLoading ? (
-        <p>Loading...</p>
-      ) : error ? (
-        <p>Error: {error.message}</p>
-      ) : (
-        <p className={css.text}>{data}</p>
-      )}
-    </div>
-  );
+  return <FormCard data={data} />;
 };

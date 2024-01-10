@@ -1,18 +1,25 @@
 import css from "./aside.module.css";
 import { CiStar } from "react-icons/ci";
+import { TiStarFullOutline } from "react-icons/ti";
 export const Aside = ({ isBtnActive }) => {
   return (
-    <aside className={css.aside} style={{width: isBtnActive ? "80px" : "25px"}}>
+    <aside
+      className={css.aside}
+      style={{
+        width: isBtnActive ? "80px" : "25px",
+        marginRight: !isBtnActive && "85px",
+      }}
+    >
       <ul className={css.listIcons}>
         <li>
-          <CiStar />
+          <TiStarFullOutline className={css.svg} />
         </li>
 
         <li>
-          <CiStar />
+          <TiStarFullOutline className={css.svg} />
         </li>
         <li>
-          <CiStar />
+          <TiStarFullOutline className={css.svg} />
         </li>
       </ul>
       {isBtnActive ? (

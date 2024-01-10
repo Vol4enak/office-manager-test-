@@ -1,0 +1,27 @@
+.mainCabinetBox {
+  overflow-y: scroll;
+  height: 400px;
+  padding-left: 5px;
+}
+.addMainBtn {
+  position: absolute;
+  top: 30px;
+  left: 180px;
+}
+.mainCabinetBox_helper {
+  margin-top: 30px;
+}
+.cabBox {
+  display: flex;
+  justify-content: space-between;
+  outline: 1px solid var(--color-border);
+  width: 800px;
+  padding: 5px;
+  gap: 15px;
+}
+.addInfoBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+}
