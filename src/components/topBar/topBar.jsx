@@ -11,7 +11,7 @@ export const TopBar = ({ handleCheckboxChange, checkboxes }) => {
   return (
     <div className={style.topBar}>
       <div className={style.topBarBox}>
-        <p>сотрування за</p>
+        <p>Cотрування за</p>
         <ul className={style.topBarList}>
           <li className={style.topBarListItem}>
             {checkboxes.map((checkbox) => (
