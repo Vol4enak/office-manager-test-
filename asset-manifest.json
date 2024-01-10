@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/office-manager-test-/static/css/main.c9e77384.css",
+    "main.js": "/office-manager-test-/static/js/main.c1b0e027.js",
+    "index.html": "/office-manager-test-/index.html",
+    "main.c9e77384.css.map": "/office-manager-test-/static/css/main.c9e77384.css.map",
+    "main.c1b0e027.js.map": "/office-manager-test-/static/js/main.c1b0e027.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.c9e77384.css",
+    "static/js/main.c1b0e027.js"
+  ]
+}
