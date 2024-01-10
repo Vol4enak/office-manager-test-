@@ -1,5 +1,5 @@
-import { useState } from "react";
-// import {GetFact} from "./getFact"
+import { useState, useEffect } from "react";
+import api from "../service/api";
 import css from "./formCard.module.css";
 
 export const FormCard = ({ onSubmit, onClose, id, unikId }) => {
@@ -7,6 +7,22 @@ export const FormCard = ({ onSubmit, onClose, id, unikId }) => {
   const [breed, setBreed] = useState("");
   const [years, setYears] = useState("");
   const [birthday, setBirthday] = useState("");
+  const [data, setData] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await api.getFact();
+        setData(res);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+
   const handelChange = (e) => {
     const { name, value } = e.currentTarget;
 
@@ -32,7 +48,7 @@ export const FormCard = ({ onSubmit, onClose, id, unikId }) => {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSubmit(id, unikId, name, breed, years, birthday);
+    onSubmit(id, unikId, name, breed, years, birthday, data);
     onClose(null);
   };
 
@@ -48,8 +64,14 @@ export const FormCard = ({ onSubmit, onClose, id, unikId }) => {
             placeholder="Введіть ім'я котика"
             required
           />
-          <select name="breed" onChange={handelChange} value={breed} required>
-            <option value="" disabled hidden>
+          <select
+            name="breed"
+            onChange={handelChange}
+            value={breed}
+            required
+            className={css.selectForm}
+          >
+            <option value="" disabled hidden className={css.optionForm}>
               Виберіть породу
             </option>
             <option value="Мейн-кун">Мейн-кун</option>

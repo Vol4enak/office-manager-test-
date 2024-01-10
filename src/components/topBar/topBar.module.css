@@ -17,3 +17,13 @@
 .topBarListItem input {
   vertical-align: middle;
 }
+.topBarBtnWraper {
+  padding-left: 500px;
+}
+.topBar {
+  display: flex;
+  align-items: center;
+}
+.topBarInput {
+  border-radius: 50%;
+}

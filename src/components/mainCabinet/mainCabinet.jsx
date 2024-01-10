@@ -1,4 +1,5 @@
-import css from "../СardList/CardList.module.css";
+import css from "./mainCabinet.module.css";
+
 import { useState, useEffect } from "react";
 import { IoAdd } from "react-icons/io5";
 
@@ -51,18 +52,18 @@ export const MainCabinet = ({
   };
 
   return (
-    <div className={css.wrapper}>
+    <div className={css.mainCabinetBox}>
       <button
-        className={css.addBtn}
+        className={css.addMainBtn}
         type="button"
         onClick={() => handleAddElement(nanoid())}
       >
-        Добавить элемент
+        Новий кабінет
       </button>
       {cabinets && cabinets.length ? (
         <>
           {cabinets.map(({ id, key, numOfCab }) => (
-            <div key={id} className={css.boxWrapper}>
+            <div key={id} className={css.mainCabinetBox_helper}>
               <div key={key} className={css.cabBox}>
                 <h2>{"Kaбінет " + numOfCab}</h2>
                 <button
@@ -76,9 +77,7 @@ export const MainCabinet = ({
 
               {isOpenForm === key && (
                 <FormCard
-                  onSubmit={(id, unikId, name, breed, years, birthday) =>
-                    onSubmit(id, unikId, name, breed, years, birthday)
-                  }
+                  onSubmit={onSubmit}
                   id={key}
                   unikId={nanoid()}
                   onClose={() => setIsOpenForm(null)}

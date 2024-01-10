@@ -8,10 +8,10 @@ export function App() {
   const [btnText, setBtnText] = useState(true);
   const [catsInfo, setCatsInfo] = useState([]);
   const [checkboxes, setCheckboxes] = useState([
-    { id: 1, label: "Датою", isChecked: false },
-    { id: 2, label: "Віком", isChecked: false },
+    { id: "date", label: "Датою", isChecked: false },
+    { id: "age", label: "Віком", isChecked: false },
   ]);
-
+  const message = "There is no fact about this cat yet";
   const deleteInfoCats = (idCatsInfo) => {
     setCatsInfo((prevState) =>
       prevState.filter((catsInfo) => catsInfo.unikId !== idCatsInfo)
@@ -20,7 +20,15 @@ export function App() {
       localStorage.removeItem("catsInfo");
     }
   };
-  const formSubmitHandler = (id, unikId, name, breed, years, birthday) => {
+  const formSubmitHandler = (
+    id,
+    unikId,
+    name,
+    breed,
+    years,
+    birthday,
+    data
+  ) => {
     const cabinet = {
       id,
       unikId,
@@ -28,16 +36,17 @@ export function App() {
       breed,
       years,
       birthday,
+      data: data !== null ? data : message,
     };
 
     setCatsInfo([cabinet, ...catsInfo]);
   };
 
-  const handleEditSubmit = (id, unikId, name, breed, years, birthday) => {
+  const handleEditSubmit = (id, unikId, name, breed, years, birthday, data) => {
     setCatsInfo((prevItems) =>
       prevItems.map((item) =>
         item.unikId === unikId
-          ? { ...item, id, name, breed, years, birthday }
+          ? { ...item, id, name, breed, years, birthday, data }
           : item
       )
     );
@@ -74,23 +83,25 @@ export function App() {
   };
 
   return (
-    <div className={css.box}>
-      <Aside isBtnActive={btnText} />
-      <button className={css.toggleButton} onClick={handleBtn}>
-        {btnText ? "hide text" : "show text"}
-      </button>
-      <TopBar
-        handleCheckboxChange={handleCheckboxChange}
-        checkboxes={checkboxes}
-      />
+    <div>
+      <div className={css.box}>
+        <Aside isBtnActive={btnText} />
+        <button className={css.toggleButton} onClick={handleBtn}>
+          {btnText ? "hide text" : "show text"}
+        </button>
+        <TopBar
+          handleCheckboxChange={handleCheckboxChange}
+          checkboxes={checkboxes}
+        />
 
-      <MainCabinet
-        checkboxes={checkboxes}
-        catsInfo={catsInfo}
-        deleteInfoCats={deleteInfoCats}
-        onSubmit={formSubmitHandler}
-        handleEditSubmit={handleEditSubmit}
-      />
+        <MainCabinet
+          checkboxes={checkboxes}
+          catsInfo={catsInfo}
+          deleteInfoCats={deleteInfoCats}
+          onSubmit={formSubmitHandler}
+          handleEditSubmit={handleEditSubmit}
+        />
+      </div>
     </div>
   );
 }
