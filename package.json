@@ -2,7 +2,7 @@
   "name": "office-manager-test-",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://vol4enak.github.io/office-manager-test-",
+  "homepage": "https://Vol4enak.github.io/office-manager-test-",
   "dependencies": {
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
