@@ -105,4 +105,3 @@ export const FormCard = ({ onSubmit, onClose, id, unikId }) => {
     </>
   );
 };
-console.log(123)
