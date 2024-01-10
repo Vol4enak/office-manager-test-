@@ -2,7 +2,6 @@ import { IoBan } from "react-icons/io5";
 import { MdEdit } from "react-icons/md";
 import { IconContext } from "react-icons";
 import style from "../CardList.module.css";
-import { GetFact } from "../../formCard/getFact";
 import { useState } from "react";
 import { EditForm } from "../../formCard/editForm/editForm";
 
@@ -13,10 +12,9 @@ export const CardItem = ({
   handleEditSubmit,
 }) => {
   const [isOpenForm, setIsOpenForm] = useState(null);
-  // const [isFormEdit, setIsFormEdit] = useState(true);
   const toggleEditForm = (itemId) => {
     setIsOpenForm((prev) => (prev === itemId ? null : itemId));
-    // setIsFormEdit(false);
+
   };
 
   const getFilteredAndSortedItems = () => {
@@ -33,7 +31,13 @@ export const CardItem = ({
     }
 
     if (sortByDate && sortByDate.isChecked) {
-      filteredItems = filteredItems.filter((item) => item.years <= 2);
+      filteredItems = filteredItems.filter((item) => {
+        if (!item.years) {
+          return false;
+        }
+
+        return item.years <= 2;
+      });
       filteredItems.sort(compareAges);
     }
 
@@ -115,7 +119,10 @@ export const CardItem = ({
                         </button>
                       </div>
 
-                      <p className={style.factText} style={{ backgroundColor: getRandomHexColor() }}>
+                      <p
+                        className={style.factText}
+                        style={{ backgroundColor: getRandomHexColor() }}
+                      >
                         {data}
                       </p>
                     </>

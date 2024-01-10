@@ -1,11 +1,8 @@
 import css from "./mainCabinet.module.css";
-
 import { useState, useEffect } from "react";
 import { IoAdd } from "react-icons/io5";
-
 import { FormCard } from "../formCard/formCard";
 import { nanoid } from "nanoid";
-
 import { CardItem } from "../СardList/Carditem/carditem.jsx";
 
 export const MainCabinet = ({
@@ -97,4 +94,4 @@ export const MainCabinet = ({
     </div>
   );
 };
-// localStorage.clear();
+

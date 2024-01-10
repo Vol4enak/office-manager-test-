@@ -8,10 +8,10 @@
   width: 150px;
 }
 .selectForm {
-  /* Стили для select в темном режиме */
+
   background-color: var(--bgc-color);
   color: var(--color-text);
-  /* Добавьте другие стили по вашему усмотрению */
+
 }
 
 .areaEdit {

@@ -1,5 +1,4 @@
 import css from "./aside.module.css";
-import { CiStar } from "react-icons/ci";
 import { TiStarFullOutline } from "react-icons/ti";
 export const Aside = ({ isBtnActive }) => {
   return (
