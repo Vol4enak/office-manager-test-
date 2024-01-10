@@ -1,7 +1,7 @@
 import style from "./topBar.module.css";
 import { useTheme } from "../service/hooks/changeTheme";
 export const TopBar = ({ handleCheckboxChange, checkboxes }) => {
-  const { theme, setTheme } = useTheme();
+  const { setTheme } = useTheme();
   const handleLightSwitcher = () => {
     setTheme("light");
   };
